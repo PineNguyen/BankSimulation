@@ -64,22 +64,23 @@ public class enterValueMoney extends JPanel {
 		lblNewLabel_1.setBounds(64, 94, 322, 34);
 		add(lblNewLabel_1);
 		
-		lblNote = new JLabel("SỐ TIỀN PHẢI LÀ BỘI CỦA 10.000 VÀ KHÔNG VƯỢT QUÁ 15.000.000");
+		lblNote = new JLabel("");
 		lblNote.setForeground(Color.RED);
 		lblNote.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNote.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNote.setBounds(33, 168, 384, 29);
 		add(lblNote);
-		
-		lblNote.setVisible(false);
 	}
 	
 	public void clearNote() {
-		lblNote.setVisible(false);
+		lblNote.setText("");
 	}
 	
 	public void setNote() {
-		lblNote.setVisible(true);
+		lblNote.setText("SỐ TIỀN PHẢI LÀ BỘI CỦA 10.000 VÀ KHÔNG VƯỢT QUÁ 15.000.000");
 	}
 
+	public void setEnterValue() {
+		lblNote.setText("HÃY NHẬP MỆNH GIÁ MUỐN RÚT!");
+	}
 }

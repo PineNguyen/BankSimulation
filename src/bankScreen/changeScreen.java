@@ -49,7 +49,6 @@ public class changeScreen {
 	
 	public void setMainView() {
 		this.setNowPanel("DangNhap");
-		System.out.println(this.getNowPanel());
 		
 		loginPanel = new loginPanel();
 		
@@ -62,7 +61,6 @@ public class changeScreen {
 	
 	public void setOptionView() {
 		this.setNowPanel("TuyChon");
-		System.out.println(this.getNowPanel());
 		
 		optionPanel = new optionPanel();
 		
@@ -75,7 +73,6 @@ public class changeScreen {
 	
 	public void setInfoView(String accClicked) {
 		this.setNowPanel("ThongTinTK");
-		System.out.println(this.getNowPanel());
 		
 		infoPanel = new infoPanel(accClicked);
 		
@@ -88,7 +85,6 @@ public class changeScreen {
 	
 	public void setChooseValueView() {
 		this.setNowPanel("ChonMenhGia");
-		System.out.println(this.getNowPanel());
 		
 		chooseValuePanel = new chooseValuePanel();
 		
@@ -101,7 +97,6 @@ public class changeScreen {
 	
 	public void setTransferView(String nowAcc) {
 		this.setNowPanel("ChuyenTien");
-		System.out.println(this.getNowPanel());
 		
 		transferPanel = new transferPanel(nowAcc);
 		
@@ -114,7 +109,6 @@ public class changeScreen {
 	
 	public void setChangePinView(String accClicked, String name, String lbl1, String lbl2) {
 		this.setNowPanel(name);
-		System.out.println(this.getNowPanel());
 		
 		changePinPanel = new changePinPanel(accClicked, lbl1, lbl2);
 		
@@ -127,7 +121,6 @@ public class changeScreen {
 	
 	public void setAccBalanceView(String accClicked) {
 		this.setNowPanel("XemSoDu");
-		System.out.println(this.getNowPanel());
 		
 		accBalancePanel = new accBalancePanel(accClicked);
 		
@@ -140,7 +133,6 @@ public class changeScreen {
 	
 	public void setCompleteView() {
 		this.setNowPanel("HoanThanh");
-		System.out.println(this.getNowPanel());
 		
 		completePanel = new completePanel();
 		
@@ -153,7 +145,6 @@ public class changeScreen {
 	
 	public void setEnoughMoneyView() {
 		this.setNowPanel("KhongDuTien");
-		System.out.println(this.getNowPanel());
 		
 		enoughMoneyPanel = new enoughMoneyPanel();
 		
@@ -166,7 +157,6 @@ public class changeScreen {
 	
 	public void setEnterValue(String accClicked) {
 		this.setNowPanel("NhapTien");
-		System.out.println(this.getNowPanel());
 		
 		enterValue = new enterValueMoney(accClicked);
 		

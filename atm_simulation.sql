@@ -1,0 +1,76 @@
+CREATE DATABASE atm_simulation
+USE atm_simulation
+
+CREATE TABLE Owners (
+	ID int PRIMARY KEY,
+    OwnerName varchar(255),
+    DateOfBirth date
+)
+
+alter table Owners
+Drop table CardInfo
+drop table Regist
+
+alter table Regist
+drop constraint fk_CardReg
+alter table Regist
+drop constraint fk_OwnReg
+
+CREATE TABLE CardInfo (
+	AccNum varchar(20) PRIMARY KEY,
+    Pin int,
+    Balance int
+)
+
+CREATE TABLE Regist (
+	ID int,
+    AccNum varchar(20),
+    CONSTRAINT pk_Reg PRIMARY KEY(ID, AccNum)
+)
+
+ALTER TABLE Regist
+	ADD CONSTRAINT fk_OwnReg FOREIGN KEY(ID) REFERENCES 
+    Owners(ID) ON UPDATE CASCADE ON DELETE CASCADE
+    
+ALTER TABLE Regist
+	ADD CONSTRAINT fk_CardReg FOREIGN KEY(AccNum) REFERENCES
+    CardInfo(AccNum) ON UPDATE CASCADE ON DELETE CASCADE
+  
+alter table Regist
+	drop constraint fk_OwnReg
+    
+alter table Regist
+	drop constraint fk_CardReg
+
+INSERT INTO Owners(ID, OwnerName, DateOfBirth) VALUES 
+(230001, 'NGUYEN VAN QUANG', '1997-02-11'),
+(230002, 'PHAM QUANG PHUOC', '1990-07-17'),
+(230003, 'DAO XUAN SANG', '1996-04-11'),
+(230004, 'NGUYEN QUANG LOC', '1992-01-11'),
+(230005, 'TRAN THI MY', '1995-03-12'),
+(230006, 'PHAM THI DUNG', '1990-04-14'),
+(230007, 'PHAN VAN PHUOC', '1987-05-20')
+
+INSERT INTO CardInfo(AccNum, Pin, Balance) VALUES
+('111122222023', 123456, 1000000),
+('111133332023', 121212, 2000000),
+('123422222023', 111111, 3000000),
+('567822222023', 456789, 10000000),
+('111145672023', 454545, 3000000),
+('111144442023', 123123, 24000000),
+('111134562023', 852852, 13000000),
+('111123452023', 456456, 5000000),
+('345612122023', 321321, 30000000),
+('222212342023', 789987, 25000000)
+
+INSERT INTO Regist(ID, AccNum) VALUES 
+(230001, '111122222023'),
+(230002, '111133332023'),
+(230003, '123422222023'),
+(230002, '567822222023'),
+(230004, '111145672023'),
+(230005, '111144442023'),
+(230006, '111134562023'),
+(230007, '111123452023'),
+(230003, '345612122023'),
+(230005, '222212342023')

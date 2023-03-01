@@ -64,7 +64,7 @@ public class chooseValueController {
 			ResultSet rs = st.executeQuery(sqlSelected);
 			
 			while(rs.next()) {
-				if(rs.getInt("Balance")>=this.getValueMoney()) {
+				if(rs.getInt("Balance")-2000>=this.getValueMoney()) {
 					this.setRet(1);
 					this.setNowBalance(rs.getInt("Balance"));
 					this.processMoney();
@@ -90,7 +90,7 @@ public class chooseValueController {
 			Connection con = loginDatabase.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sqlUpdated);
 			
-			pstmt.setInt(1, this.getNowBalance() - this.getValueMoney());
+			pstmt.setInt(1, this.getNowBalance() - (this.getValueMoney()+2000));
 			pstmt.setString(2, this.getAccClicked());
 			
 			pstmt.executeUpdate();

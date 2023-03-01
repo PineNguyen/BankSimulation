@@ -53,7 +53,6 @@ public class changePinController {
 		char[] tmp = this.changePin.getPasswordField().getPassword();
 		pass = new String(tmp);
 		if(pass.length()<6) {
-			System.out.println(pass);
 			this.changePin.setPasswordField(pass+this.value);
 			this.setNewPin(pass+this.value);
 		}
@@ -67,7 +66,6 @@ public class changePinController {
 		char[] tmp = this.changePin.getPasswordField().getPassword();
 		pass = new String(tmp);
 		if(pass.length()<6) {
-			System.out.println(pass);
 			this.changePin.setPasswordField(pass+this.value);
 		}
 	}

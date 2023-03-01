@@ -39,10 +39,16 @@ public class enterValueController {
 	
 	public void checkValue() {
 		this.setRet(1);
-		int tmp = Integer.parseInt(enterValue.getValueMoney().getText());
 		
-		if(tmp%10!=0 || tmp>15000000) {
-			this.setRet(0);
+		try {
+			int tmp = Integer.parseInt(enterValue.getValueMoney().getText());
+			
+			if(tmp%10!=0 || tmp>15000000) {
+				this.setRet(0);
+			}
+		}
+		catch(Exception e) {
+			this.callEnterValue();
 		}
 	}
 	
@@ -69,12 +75,12 @@ public class enterValueController {
 			ResultSet rs = st.executeQuery(sqlSelected);
 			
 			while(rs.next()) {
-				if(rs.getInt("Balance")>=money) {
+				if(rs.getInt("Balance")-2000>=money) {
 					this.setRet(1);
 					
 					PreparedStatement pstmt = con.prepareStatement(sqlUpdated);
 					
-					pstmt.setInt(1, rs.getInt("Balance") - money);
+					pstmt.setInt(1, rs.getInt("Balance") - (money+2000));
 					pstmt.setString(2, enterValue.getAccClicked());
 					
 					pstmt.executeUpdate();
@@ -93,5 +99,9 @@ public class enterValueController {
 	
 	public void callNote() {
 		this.enterValue.setNote();
+	}
+	
+	public void callEnterValue() {
+		this.enterValue.setEnterValue();
 	}
 }

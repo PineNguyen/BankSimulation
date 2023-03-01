@@ -65,14 +65,12 @@ public class keyListener implements ActionListener {
 	
 	public void readScreenKind() {
 		kind = change.getNowPanel();
-		System.out.println(kind);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) { 
 		this.readScreenKind();
 		String nowPanel = this.kind;
-		System.out.println(nowPanel);
 		
 		value = e.getActionCommand();
 		
@@ -104,28 +102,38 @@ public class keyListener implements ActionListener {
 				this.getLoginPanel();
 
 				if(login.checkPassword()==1) {
-					System.out.println("change");
 					change.setOptionView();
+				}
+				else if(login.checkPassword()==0) {
+					login.clearPassword();
+					login.callErorr();
 				}
 				else {
 					login.clearPassword();
-					login.callErorr();
+					login.callChooseAcc();
 				}
 			}
 			else if(nowPanel.equals("ChuyenTien")) {
 				this.getTransferPanel();
-				transfer.checkValueTransfer();
+				transfer.checkAcc();
 				if(transfer.getRet()==0) {
+					transfer.callChooseAcc();
 					transfer.clearValueTransfer();
-					transfer.callNote();
 				}
 				else {
-					transfer.checkMoney();
-					if(transfer.getRet()==1) {
-						change.setCompleteView();
+					transfer.checkValueTransfer();
+					if(transfer.getRet()==0) {
+						transfer.clearValueTransfer();
+						transfer.callNote();
 					}
 					else {
-						change.setEnoughMoneyView();
+						transfer.checkMoney();
+						if(transfer.getRet()==1) {
+							change.setCompleteView();
+						}
+						else {
+							change.setEnoughMoneyView();
+						}
 					}
 				}
 			}

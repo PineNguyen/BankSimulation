@@ -43,7 +43,6 @@ public class loginController {
 		char[] tmp = this.login.getPasswordField().getPassword();
 		pass = new String(tmp);
 		if(pass.length()<6) {
-			System.out.println(pass);
 			this.login.setPasswordField(pass+this.value);
 		}
 	}
@@ -54,24 +53,29 @@ public class loginController {
 		String sqlSelected = "SELECT * FROM CardInfo"
 					+ "	WHERE AccNum = " + this.getAccClicked();
 		
-		try {
-			Connection con = loginDatabase.getConnection();
-			Statement st = con.createStatement(
-					ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+		if(this.getAccClicked()==null) {
+			ret = 2;
+		}
+		else {
+			try {
+				Connection con = loginDatabase.getConnection();
+				Statement st = con.createStatement(
+						ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
 
-			ResultSet rs = st.executeQuery(sqlSelected);
-			
-			while(rs.next()) {
-				this.setPinCode(rs.getString("Pin"));
-				char[] tmp = this.login.getPasswordField().getPassword();
-				pass = new String(tmp);
-				if(this.getPinCode().equals(pass)) {
-					ret = 1; 
+				ResultSet rs = st.executeQuery(sqlSelected);
+				
+				while(rs.next()) {
+					this.setPinCode(rs.getString("Pin"));
+					char[] tmp = this.login.getPasswordField().getPassword();
+					pass = new String(tmp);
+					if(this.getPinCode().equals(pass)) {
+						ret = 1; 
+					}
 				}
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-			con.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		
 		return ret;
@@ -83,5 +87,13 @@ public class loginController {
 	
 	public void callErorr() {
 		this.login.setLabelErorr();
+	}
+	
+	public void callChooseAcc() {
+		this.login.setChooseAcc();
+	}
+	
+	public void clearChooseAcc() {
+		this.login.clearChooseAcc();
 	}
 }

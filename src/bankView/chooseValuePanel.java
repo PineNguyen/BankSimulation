@@ -87,7 +87,7 @@ public class chooseValuePanel extends JPanel {
 		add(panel_1_2_1);
 		panel_1_2_1.setLayout(null);
 		
-		JLabel lb_SoKhac = new JLabel("SO KHAC");
+		JLabel lb_SoKhac = new JLabel("SỐ KHÁC");
 		lb_SoKhac.setHorizontalAlignment(SwingConstants.TRAILING);
 		lb_SoKhac.setForeground(Color.WHITE);
 		lb_SoKhac.setFont(new Font("Tahoma", Font.BOLD, 20));

@@ -38,10 +38,16 @@ public class transferController {
 	
 	public void checkValueTransfer() {
 		this.setRet(1);
-		int tmp = Integer.parseInt(transfer.getValueTrans().getText());
 		
-		if(tmp%10!=0 || tmp>20000000) {
-			this.setRet(0);
+		try {
+			int tmp = Integer.parseInt(transfer.getValueTrans().getText());
+			
+			if(tmp%10!=0 || tmp>20000000) {
+				this.setRet(0);
+			}
+		}
+		catch(Exception e) {
+			this.callEnterNote();
 		}
 	}
 	
@@ -68,12 +74,12 @@ public class transferController {
 			ResultSet rs = st.executeQuery(sqlSelected);
 			
 			while(rs.next()) {
-				if(rs.getInt("Balance")>=money) {
+				if(rs.getInt("Balance")-2000>=money && transfer.getAccClicked()!=null) {
 					this.setRet(1);
 					
 					PreparedStatement pstmt = con.prepareStatement(sqlUpdated);
 					
-					pstmt.setInt(1, rs.getInt("Balance") - money);
+					pstmt.setInt(1, rs.getInt("Balance") - (money + 2000));
 					pstmt.setString(2, transfer.getNowAcc());
 					
 					pstmt.executeUpdate();
@@ -116,11 +122,42 @@ public class transferController {
 				
 				pstmt.executeUpdate();
 				
-			}
-			
+			}	
 			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public void labelName(String accClicked) {
+		String sqlSelected = "SELECT * FROM Owners AS A"
+				+ "	INNER JOIN Regist AS B ON A.ID = B.ID"
+				+ "		INNER JOIN CardInfo AS C ON B.AccNum = C.AccNum"
+				+ "			WHERE B.AccNum = " + accClicked;
+		
+		try {
+			Connection con = loginDatabase.getConnection();
+			Statement st = con.createStatement(
+					ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+			ResultSet rs = st.executeQuery(sqlSelected);
+			
+			
+			while(rs.next()) {
+				if(accClicked.equals(rs.getString("AccNum"))) {
+					transfer.setLblNameAcc(rs.getString("OwnerName"));
+				}
+			}
+			con.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void checkAcc() {
+		this.setRet(1);
+		
+		if(transfer.getAccClicked()==null) {
+			this.setRet(0);
 		}
 	}
 	
@@ -130,5 +167,17 @@ public class transferController {
 	
 	public void callNote() {
 		this.transfer.setNote();
+	}
+	
+	public void callChooseAcc() {
+		this.transfer.setChooseAcc();
+	}
+	
+	public void clearChooseAcc() {
+		this.transfer.clearChooseAcc();
+	}
+	
+	public void callEnterNote() {
+		this.transfer.enterValueNote();
 	}
 }
