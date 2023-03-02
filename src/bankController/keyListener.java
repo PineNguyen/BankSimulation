@@ -168,7 +168,10 @@ public class keyListener implements ActionListener {
 			}
 			else if(nowPanel.equals("NhapPinMoi")) {
 				this.getChangePin();
-				if(changePin.getNewPin().length()==6) {
+				if(changePin.getNewPin()==null) {
+					changePin.callEnter();
+				}
+				else if(changePin.getNewPin().length()==6) {
 					this.setNewPin(changePin.getNewPin());
 					
 					change.setChangePinView(login.getAccClicked(), "NhapLaiPin",

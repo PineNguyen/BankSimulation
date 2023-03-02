@@ -157,4 +157,7 @@ public class changePinController {
 		this.changePin.callNote();
 	}
 	
+	public void callEnter() {
+		this.changePin.callEnterPin();
+	}
 }

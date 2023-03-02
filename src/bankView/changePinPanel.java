@@ -26,6 +26,7 @@ import bankDatabase.loginDatabase;
 public class changePinPanel extends JPanel {
 	private changePinController changePin;
 	private JPasswordField passwordField;
+	private JLabel lblEnterPin;
 	public JPasswordField getPasswordField() {
 		return passwordField;
 	}
@@ -69,6 +70,14 @@ public class changePinPanel extends JPanel {
 		add(lblHead);
 		lblHead.setText(lbl1);
 		
+		lblEnterPin = new JLabel("HÃY NHẬP MÃ PIN ĐỂ TIẾP TỤC!");
+		lblEnterPin.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		lblEnterPin.setForeground(Color.RED);
+		lblEnterPin.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEnterPin.setBounds(77, 204, 296, 40);
+		add(lblEnterPin);
+		lblEnterPin.setVisible(false);
+		
 		passwordField = new JPasswordField();
 		passwordField.setFont(new Font("Tahoma", Font.BOLD, 24));
 		passwordField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -94,6 +103,10 @@ public class changePinPanel extends JPanel {
 	
 	public void clearNote() {
 		lblNote.setVisible(false);
+		lblEnterPin.setVisible(false);
 	}
 	
+	public void callEnterPin() {
+		lblEnterPin.setVisible(true);
+	}
 }
