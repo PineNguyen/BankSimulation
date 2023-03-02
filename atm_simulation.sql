@@ -7,15 +7,6 @@ CREATE TABLE Owners (
     DateOfBirth date
 )
 
-alter table Owners
-Drop table CardInfo
-drop table Regist
-
-alter table Regist
-drop constraint fk_CardReg
-alter table Regist
-drop constraint fk_OwnReg
-
 CREATE TABLE CardInfo (
 	AccNum varchar(20) PRIMARY KEY,
     Pin int,
@@ -35,12 +26,7 @@ ALTER TABLE Regist
 ALTER TABLE Regist
 	ADD CONSTRAINT fk_CardReg FOREIGN KEY(AccNum) REFERENCES
     CardInfo(AccNum) ON UPDATE CASCADE ON DELETE CASCADE
-  
-alter table Regist
-	drop constraint fk_OwnReg
-    
-alter table Regist
-	drop constraint fk_CardReg
+
 
 INSERT INTO Owners(ID, OwnerName, DateOfBirth) VALUES 
 (230001, 'NGUYEN VAN QUANG', '1997-02-11'),
